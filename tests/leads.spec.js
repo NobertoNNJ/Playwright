@@ -1,13 +1,73 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { LandingPage } from './pages/LandingPage';
+
+test('deve cadastrar um lead na fila de espera', async ({page}) => {
+  const landingPage = new LandingPage(page)
+
+  await landingPage.visit()
+  await landingPage.openLeadModal()
+  await landingPage.submitLeadForm('Jhon Doe', 'jhondoe@gmail.com')
+
+  const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
+  
+  await landingPage.toastHaveTest(message)
+
+})
+
+test('não deve cadastrar com email invalido', async ({ page }) => {
+  const landingPage = new LandingPage(page)
+
+  await landingPage.visit()
+  await landingPage.openLeadModal()
+  await landingPage.submitLeadForm('Jhon Doe', 'jhondoe.com')
+
+  await landingPage.alertHaveText('Email incorreto')
+})
+
+test('não deve cadastrar com nome vazio', async ({ page }) => {
+  const landingPage = new LandingPage(page)
+
+  await landingPage.visit()
+  await landingPage.openLeadModal()
+  await landingPage.submitLeadForm('', 'jhondoe@gmail.com')
+
+  await landingPage.alertHaveText('Campo obrigatório')
+})
+
+test('não deve cadastrar com email vazio', async ({ page }) => {
+  const landingPage = new LandingPage(page)
+
+  await landingPage.visit()
+  await landingPage.openLeadModal()
+  await landingPage.submitLeadForm('Jhon Doe', '')
+
+  await landingPage.alertHaveText('Campo obrigatório')
+})
+
+test('não deve cadastrar com campos em branco', async ({ page }) => {
+  const landingPage = new LandingPage(page)
+
+  await landingPage.visit()
+  await landingPage.openLeadModal()
+  await landingPage.submitLeadForm('', '')
+
+  await landingPage.alertHaveText([
+    'Campo obrigatório',
+    'Campo obrigatório'
+  ])
+})
+/*
 
 test('deve cadastrar um lead na fila de espera', async ({ page }) => {
+
+  //visit
   await page.goto('http://localhost:3000');
 
   //await page.click('//button[text()="Aperte o play... se tiver coragem"]')
 
   //await page.getByRole('button', {name: 'Aperte o play... se tiver coragem'}).click()
-
+  //open LeadModal
   await page.getByRole('button', {name: /Aperte o play/}).click()
 
   await expect(
@@ -17,6 +77,7 @@ test('deve cadastrar um lead na fila de espera', async ({ page }) => {
   //apenas funciona para data-testid
   //await page.getByTestId('name').fill('Jhon Doe')
   // selecionar por id
+  //submit lead form
   await page.locator('#name').fill('Jhon Doe')
   //selecionar por name
   await page.locator('input[name=email]').fill('jhondoe@gmail.com')
@@ -27,6 +88,7 @@ test('deve cadastrar um lead na fila de espera', async ({ page }) => {
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()
 
+  // toast have test
   const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
 
   await expect(page.locator('.toast')).toHaveText(message)
@@ -37,6 +99,7 @@ test('deve cadastrar um lead na fila de espera', async ({ page }) => {
 });
 
 test('não deve cadastrar com email invalido', async ({ page }) => {
+  
   await page.goto('http://localhost:3000');
 
   await page.getByRole('button', {name: /Aperte o play/}).click()
@@ -48,7 +111,6 @@ test('não deve cadastrar com email invalido', async ({ page }) => {
   await page.locator('#name').fill('Jhon Doe')
   await page.locator('input[name=email]').fill('jhondoe.com')
 
-
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()
 
@@ -56,3 +118,63 @@ test('não deve cadastrar com email invalido', async ({ page }) => {
 
   await page.waitForTimeout(3000)
 });
+
+
+test('não deve cadastrar com nome vazio', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  await page.getByRole('button', {name: /Aperte o play/}).click()
+
+  await expect(
+    page.getByTestId('modal').getByRole('heading')
+  ).toHaveText('Fila de espera')
+  
+  await page.locator('input[name=email]').fill('jhondoe@gmail.com')
+
+  await page.getByTestId('modal')
+    .getByText('Quero entrar na fila!').click()
+
+  await expect(page.locator('.alert')).toHaveText('Campo obrigatório')
+
+  await page.waitForTimeout(3000)
+});
+
+
+test('não deve cadastrar com email não preenchido', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  await page.getByRole('button', {name: /Aperte o play/}).click()
+
+  await expect(
+    page.getByTestId('modal').getByRole('heading')
+  ).toHaveText('Fila de espera')
+  
+  await page.locator('#name').fill('Jhon Doe')
+
+  await page.getByTestId('modal')
+    .getByText('Quero entrar na fila!').click()
+
+  await expect(page.locator('.alert')).toHaveText('Campo obrigatório')
+
+  await page.waitForTimeout(3000)
+});
+
+test('não deve cadastrar com campos não preenchidos', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  await page.getByRole('button', {name: /Aperte o play/}).click()
+
+  await expect(
+    page.getByTestId('modal').getByRole('heading')
+  ).toHaveText('Fila de espera')
+
+  await page.getByTestId('modal')
+    .getByText('Quero entrar na fila!').click()
+
+  await expect(page.locator('.alert')).toHaveText([
+    'Campo obrigatório',
+    'Campo obrigatório'
+  ])
+
+  await page.waitForTimeout(3000)
+});*/
