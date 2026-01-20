@@ -1,7 +1,13 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { LandingPage } from './pages/LandingPage';
+import { LandingPage } from '../pages/LandingPage';
+/*
+let landingPage
 
+test.beforeEach(async ({page}) => {
+  landingPage = new LandingPage(page)
+})
+*/
 test('deve cadastrar um lead na fila de espera', async ({page}) => {
   const landingPage = new LandingPage(page)
 
