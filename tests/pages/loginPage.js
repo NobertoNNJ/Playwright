@@ -16,7 +16,13 @@ export class LoginPage{
     async submit(email, password){
         await this.page.getByPlaceholder('E-mail').fill(email)
         await this.page.getByPlaceholder('Senha').fill(password)
-
-        await this.page.locator('//button[text()="entrar"]').click()
+        await this.page.getByText('Entrar').click()
+    }
+    async isLoggedIn(){
+        await this.page.waitForLoadState('networkidle')
+        await expect(this.page).toHaveURL(/.*admin/)
+        
+        const logoutLink = this.page.locator('a[href="/logout"]')
+        await expect(logoutLink).toBeVisible()
     }
 }
