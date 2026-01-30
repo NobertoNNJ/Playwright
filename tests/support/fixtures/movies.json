@@ -1,0 +1,82 @@
+{
+  "movie_1": {
+    "title": "A Noite dos Mortos-Vivos",
+    "overview": "Um grupo de pessoas se refugia em uma casa de campo enquanto mortos-vivos começam a atacar os vivos.",
+    "featured": false,
+    "release_year": 1968,
+    "company": "Image Ten",
+    "cover": "/images/night_of_the_living_dead.jpg"
+  },
+  "movie_2": {
+    "title": "Despertar dos Mortos",
+    "overview": "Sobreviventes se escondem em um shopping center enquanto o mundo é tomado por zumbis.",
+    "featured": false,
+    "release_year": 1978,
+    "company": "United Film Distribution Company",
+    "cover": "/images/dawn_of_the_dead.jpg"
+  },
+  "movie_3": {
+    "title": "Extermínio",
+    "overview": "Um vírus altamente contagioso transforma pessoas em criaturas violentas, enquanto poucos sobreviventes lutam para sobreviver.",
+    "featured": false,
+    "release_year": 2002,
+    "company": "Fox Searchlight Pictures",
+    "cover": "/images/28_days_later.jpg"
+  },
+  "movie_4": {
+    "title": "Madrugada dos Mortos",
+    "overview": "Um grupo de sobreviventes se abriga em um shopping enquanto zumbis dominam a cidade.",
+    "featured": false,
+    "release_year": 2004,
+    "company": "Universal Pictures",
+    "cover": "/images/dawn_of_the_dead_2004.jpg"
+  },
+  "movie_5": {
+    "title": "Zumbilândia",
+    "overview": "Quatro sobreviventes com personalidades diferentes tentam sobreviver em um mundo dominado por zumbis.",
+    "featured": false,
+    "release_year": 2009,
+    "company": "Columbia Pictures",
+    "cover": "/images/zombieland.jpg"
+  },
+  "movie_6": {
+    "title": "Guerra Mundial Z",
+    "overview": "Um ex-investigador da ONU percorre o mundo tentando encontrar a origem de uma epidemia zumbi global.",
+    "featured": false,
+    "release_year": 2013,
+    "company": "Paramount Pictures",
+    "cover": "/images/world_war_z.jpg"
+  },
+  "movie_7": {
+    "title": "Invasão Zumbi",
+    "overview": "Passageiros de um trem lutam pela sobrevivência durante um surto zumbi na Coreia do Sul.",
+    "featured": false,
+    "release_year": 2016,
+    "company": "Next Entertainment World",
+    "cover": "/images/train_to_busan.jpg"
+  },
+  "movie_8": {
+    "title": "Extermínio 2",
+    "overview": "Após o surto inicial, sobreviventes tentam reconstruir Londres, mas o vírus retorna de forma ainda mais letal.",
+    "featured": false,
+    "release_year": 2007,
+    "company": "Fox Atomic",
+    "cover": "/images/28_weeks_later.jpg"
+  },
+  "movie_9": {
+    "title": "REC",
+    "overview": "Uma repórter e um cinegrafista ficam presos em um prédio durante um surto de uma infecção misteriosa.",
+    "featured": false,
+    "release_year": 2007,
+    "company": "Filmax",
+    "cover": "/images/rec.jpg"
+  },
+  "movie_10": {
+    "title": "Eu Sou a Lenda",
+    "overview": "Um cientista tenta sobreviver em uma Nova York devastada por um vírus que transformou a humanidade em criaturas monstruosas.",
+    "featured": false,
+    "release_year": 2007,
+    "company": "Warner Bros. Pictures",
+    "cover": "/images/i_am_legend.jpg"
+  }
+}

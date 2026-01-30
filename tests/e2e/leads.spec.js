@@ -2,21 +2,24 @@
 import { test, expect } from '@playwright/test';
 import { LandingPage } from '../pages/LandingPage';
 const { faker } = require('@faker-js/faker');
+
+// @ts-ignore
 /*
 let landingPage
 
 test.beforeEach(async ({page}) => {
   landingPage = new LandingPage(page)
-})
-*/
+})*/
+
+
 test('deve cadastrar um lead na fila de espera', async ({page}) => {
   const landingPage = new LandingPage(page)
-
-  const leadName = faker.person.fullName()
+  const leadName = faker.person.firstName()
   const leadEmail = faker.internet.email()
 
   await landingPage.visit()
   await landingPage.openLeadModal()
+  // @ts-ignore
   await landingPage.submitLeadForm(leadName, leadEmail)
 
   const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
@@ -25,12 +28,24 @@ test('deve cadastrar um lead na fila de espera', async ({page}) => {
 
 })
 
-test('não deve cadastrar um lead na fila de espera com email ja cadastrado', async ({page}) => {
+test('não deve cadastrar um lead na fila de espera com email ja cadastrado', async ({page, request}) => {
   const landingPage = new LandingPage(page)
+  const leadName = faker.person.firstName()
+  const leadEmail = faker.internet.email()
+
+  //pré cadastra os dados na api
+  const newLead =  await request.post('http://localhost:3333/leads', {
+    data:{
+      name: leadName,
+      email: leadEmail
+    }
+  })
+  //retorna status code de sucesso
+  expect(newLead.ok()).toBeTruthy()
 
   await landingPage.visit()
   await landingPage.openLeadModal()
-  await landingPage.submitLeadForm('Jhon Doe', 'jhondoe@gmail.com')
+  await landingPage.submitLeadForm(leadName, leadEmail)
 
   const message = 'O endereço de e-mail fornecido já está registrado em nossa fila de espera.'
   

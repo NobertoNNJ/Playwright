@@ -10,4 +10,7 @@ export class MoviesPage{
         await this.page.waitForLoadState('networkidle')
         await expect(this.page).toHaveURL(/.*admin/)
     }
+    async create(title, overview, company, release_year){
+        await this.page.locator('a[href$ = "/admin/movies/register"]').click()
+    }
 }
