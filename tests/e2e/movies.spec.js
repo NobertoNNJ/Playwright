@@ -3,32 +3,43 @@ const {test} = require('@playwright/test')
 const data = require('../support/fixtures/movies.json')
 const {executeSQL} = require('../support/fixtures/database')
 
-const {LoginPage} = require ('../pages/loginPage');
-const {Toast} = require('../pages/Components')
-const {MoviesPage} = require('../pages/MoviesPage')
+const {Login} = require ('../actions/login');
+const {Toast} = require('../actions/Components')
+const {Movies} = require('../actions/Movies')
 
-let loginPage
+let login
 let toast
-let moviesPage
+let movies
 
 test.beforeEach(({page}) => {
-    loginPage = new LoginPage(page)
+    login = new Login(page)
     toast = new Toast(page)
-    moviesPage = new MoviesPage(page)
+    movies = new Movies(page)
 })
 
 test('deve poder cadastrar um  novo filme', async ({page}) => {
     const movie = data.movie_4
 
     await executeSQL(`DELETE from movies WHERE title = '${movie.title}';`)
-    //login é necessario
-    await loginPage.visit()
-    await loginPage.submit('admin@zombieplus.com', 'pwd123')
-    
-    await moviesPage.isLoggedIn()
-    await moviesPage.create(movie.title, movie.overview, movie.company, movie.release_year)
+
+    await login.do('admin@zombieplus.com', 'pwd123', 'Admin')
+
+    await movies.create(movie.title, movie.overview, movie.company, movie.release_year, movie.cover)
  
     await toast.HaveText('Cadastro realizado com sucesso!')
+})
 
+test('não deve cadastrar quando os campos obrigatorios não são preenchidos', async ({page}) => {
 
+    await login.do('admin@zombieplus.com', 'pwd123', 'Admin')
+
+    await movies.goForm()
+    await movies.submit()
+
+    await movies.alertHaveText([
+        'Por favor, informe o título.',
+        'Por favor, informe a sinopse.',
+        'Por favor, informe a empresa distribuidora.',
+        'Por favor, informe o ano de lançamento.'
+    ])
 })

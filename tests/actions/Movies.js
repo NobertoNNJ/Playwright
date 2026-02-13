@@ -1,25 +1,29 @@
 import { expect } from '@playwright/test';
 
-export class MoviesPage{
+export class Movies{
 
     constructor(page){
         this.page = page
     }
 
-    async isLoggedIn(){
-        await this.page.waitForLoadState('networkidle')
-        await expect(this.page).toHaveURL(/.*admin/)
-    }
-    async create(title, overview, company, release_year){
-
+    async goForm(){
         await this.page.locator('a[href = "/admin/movies/register"]').click()
+    }
+
+    async submit(){
+        await this.page.getByRole('button', {name:'Cadastrar'}).click()
+    }
+
+    async create(title, overview, company, release_year, cover){
+
+        await this.goForm()
     
         await this.page.getByLabel('Titulo do filme').fill(title)
         await this.page.locator('#overview').fill(overview)
     
         await this.page.locator('#select_company_id .react-select__indicator').click()
         
-        //adquirir codifo do momento em que um objeto flutuante ou algo similar acontece para inspecionar
+        //adquirir codigo do momento em que um objeto flutuante ou algo similar acontece para inspecionar
         //const html = await this.page.content()
         //console.log(html)
 
@@ -33,6 +37,13 @@ export class MoviesPage{
         .filter({hasText: release_year})
         .click()
 
-        await this.page.getByRole('button', {name:'Cadastrar'}).click()
+        await this.page.locator('input[name=cover]')
+            .setInputFiles('tests/support/fixtures' + cover)
+
+        await this.submit()
+    }
+
+    async alertHaveText(target){
+        await expect(this.page.locator('.alert')).toHaveText(target)
     }
 }

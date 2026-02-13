@@ -5,7 +5,7 @@
     "featured": false,
     "release_year": 1968,
     "company": "Image Ten",
-    "cover": "/images/night_of_the_living_dead.jpg"
+    "cover": "/covers/movies/mortos-vivos.jpg"
   },
   "movie_2": {
     "title": "Despertar dos Mortos",
@@ -21,7 +21,7 @@
     "featured": false,
     "release_year": 2002,
     "company": "Fox Searchlight Pictures",
-    "cover": "/images/28_days_later.jpg"
+    "cover": "/covers/movies/exterminio.jpg"
   },
   "movie_4": {
     "title": "Madrugada dos Mortos",
@@ -29,7 +29,7 @@
     "featured": false,
     "release_year": 2004,
     "company": "Universal Pictures",
-    "cover": "/images/dawn_of_the_dead_2004.jpg"
+    "cover": "/covers/movies/madrugada.jpg"
   },
   "movie_5": {
     "title": "Zumbilândia",
@@ -37,7 +37,7 @@
     "featured": false,
     "release_year": 2009,
     "company": "Columbia Pictures",
-    "cover": "/images/zombieland.jpg"
+    "cover": "/covers/movies/zumbilandia.jpg"
   },
   "movie_6": {
     "title": "Guerra Mundial Z",
@@ -45,7 +45,7 @@
     "featured": false,
     "release_year": 2013,
     "company": "Paramount Pictures",
-    "cover": "/images/world_war_z.jpg"
+    "cover": "/covers/movies/wwz.jpg"
   },
   "movie_7": {
     "title": "Invasão Zumbi",

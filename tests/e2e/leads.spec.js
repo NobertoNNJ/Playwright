@@ -1,35 +1,35 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { LandingPage } from '../pages/LandingPage';
+import { Leads } from '../actions/Leads';
 const { faker } = require('@faker-js/faker');
 
 // @ts-ignore
 /*
-let landingPage
+let leads
 
 test.beforeEach(async ({page}) => {
-  landingPage = new LandingPage(page)
+  leads = new leads(page)
 })*/
 
 
 test('deve cadastrar um lead na fila de espera', async ({page}) => {
-  const landingPage = new LandingPage(page)
+  const leads = new Leads(page)
   const leadName = faker.person.firstName()
   const leadEmail = faker.internet.email()
 
-  await landingPage.visit()
-  await landingPage.openLeadModal()
+  await leads.visit()
+  await leads.openLeadModal()
   // @ts-ignore
-  await landingPage.submitLeadForm(leadName, leadEmail)
+  await leads.submitLeadForm(leadName, leadEmail)
 
   const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
   
-  await landingPage.toastHaveTest(message)
+  await leads.toastHaveTest(message)
 
 })
 
 test('não deve cadastrar um lead na fila de espera com email ja cadastrado', async ({page, request}) => {
-  const landingPage = new LandingPage(page)
+  const leads = new Leads(page)
   const leadName = faker.person.firstName()
   const leadEmail = faker.internet.email()
 
@@ -43,54 +43,54 @@ test('não deve cadastrar um lead na fila de espera com email ja cadastrado', as
   //retorna status code de sucesso
   expect(newLead.ok()).toBeTruthy()
 
-  await landingPage.visit()
-  await landingPage.openLeadModal()
-  await landingPage.submitLeadForm(leadName, leadEmail)
+  await leads.visit()
+  await leads.openLeadModal()
+  await leads.submitLeadForm(leadName, leadEmail)
 
   const message = 'O endereço de e-mail fornecido já está registrado em nossa fila de espera.'
   
-  await landingPage.toastHaveTest(message)
+  await leads.toastHaveTest(message)
 
 })
 
 test('não deve cadastrar com email invalido', async ({ page }) => {
-  const landingPage = new LandingPage(page)
+  const leads = new Leads(page)
 
-  await landingPage.visit()
-  await landingPage.openLeadModal()
-  await landingPage.submitLeadForm('Jhon Doe', 'jhondoe.com')
+  await leads.visit()
+  await leads.openLeadModal()
+  await leads.submitLeadForm('Jhon Doe', 'jhondoe.com')
 
-  await landingPage.alertHaveText('Email incorreto')
+  await leads.alertHaveText('Email incorreto')
 })
 
 test('não deve cadastrar com nome vazio', async ({ page }) => {
-  const landingPage = new LandingPage(page)
+  const leads = new Leads(page)
 
-  await landingPage.visit()
-  await landingPage.openLeadModal()
-  await landingPage.submitLeadForm('', 'jhondoe@gmail.com')
+  await leads.visit()
+  await leads.openLeadModal()
+  await leads.submitLeadForm('', 'jhondoe@gmail.com')
 
-  await landingPage.alertHaveText('Campo obrigatório')
+  await leads.alertHaveText('Campo obrigatório')
 })
 
 test('não deve cadastrar com email vazio', async ({ page }) => {
-  const landingPage = new LandingPage(page)
+  const leads = new Leads(page)
 
-  await landingPage.visit()
-  await landingPage.openLeadModal()
-  await landingPage.submitLeadForm('Jhon Doe', '')
+  await leads.visit()
+  await leads.openLeadModal()
+  await leads.submitLeadForm('Jhon Doe', '')
 
-  await landingPage.alertHaveText('Campo obrigatório')
+  await leads.alertHaveText('Campo obrigatório')
 })
 
 test('não deve cadastrar com campos em branco', async ({ page }) => {
-  const landingPage = new LandingPage(page)
+  const leads = new Leads(page)
 
-  await landingPage.visit()
-  await landingPage.openLeadModal()
-  await landingPage.submitLeadForm('', '')
+  await leads.visit()
+  await leads.openLeadModal()
+  await leads.submitLeadForm('', '')
 
-  await landingPage.alertHaveText([
+  await leads.alertHaveText([
     'Campo obrigatório',
     'Campo obrigatório'
   ])
