@@ -26,7 +26,7 @@
   "movie_4": {
     "title": "Madrugada dos Mortos",
     "overview": "Um grupo de sobreviventes se abriga em um shopping enquanto zumbis dominam a cidade.",
-    "featured": false,
+    "featured": true,
     "release_year": 2004,
     "company": "Universal Pictures",
     "cover": "/covers/movies/madrugada.jpg"
@@ -34,7 +34,7 @@
   "movie_5": {
     "title": "Zumbilândia",
     "overview": "Quatro sobreviventes com personalidades diferentes tentam sobreviver em um mundo dominado por zumbis.",
-    "featured": false,
+    "featured": true,
     "release_year": 2009,
     "company": "Columbia Pictures",
     "cover": "/covers/movies/zumbilandia.jpg"

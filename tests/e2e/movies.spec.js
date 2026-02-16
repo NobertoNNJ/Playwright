@@ -17,16 +17,29 @@ test.beforeEach(({page}) => {
     movies = new Movies(page)
 })
 
-test('deve poder cadastrar um  novo filme', async ({page}) => {
+
+test('deve poder cadastrar um novo filme', async ({page}) => {
     const movie = data.movie_4
 
     await executeSQL(`DELETE from movies WHERE title = '${movie.title}';`)
 
     await login.do('admin@zombieplus.com', 'pwd123', 'Admin')
 
-    await movies.create(movie.title, movie.overview, movie.company, movie.release_year, movie.cover)
- 
+    await movies.create(movie)
     await toast.HaveText('Cadastro realizado com sucesso!')
+})
+
+test('não deve poder cadastrar um filme ja cadastrado', async ({page}) => {
+    const movie = data.movie_5
+
+    await executeSQL(`DELETE from movies WHERE title = '${movie.title}';`)
+
+    await login.do('admin@zombieplus.com', 'pwd123', 'Admin')
+    await movies.create(movie)
+    await toast.HaveText('Cadastro realizado com sucesso!')
+
+    await movies.create(movie)
+    await toast.HaveText('Este conteúdo já encontra-se cadastrado no catálogo')
 })
 
 test('não deve cadastrar quando os campos obrigatorios não são preenchidos', async ({page}) => {
